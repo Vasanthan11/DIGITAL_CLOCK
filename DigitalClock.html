@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            padding: 0%;
+            margin: 0%;
+            overflow-x: hidden;
+            overflow-y: hidden;
+            box-sizing: border-box;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        h1 {
+            color: rgb(0, 0, 0);
+            font-family: URW chancery L, cursive;
+            font-size: 40px;
+            text-align: center;
+            background-color: rgb(255, 251, 251);
+            display: inline-block;
+            width: 100%;
+            padding: 15px;
+        }
+
+        #time {
+            height: 200px;
+            width: 600px;
+            background-color: rgb(0, 0, 0);
+            color: whitesmoke;
+            text-align: center;
+            font-size: 60px;
+            padding-top: 29px;
+            border-radius: 0px 0px 10px 10px;
+            border-left: 20px solid rgb(218, 182, 22);
+            border-right: 20px solid rgb(218, 182, 22);
+            border-bottom: 20px solid rgb(218, 182, 22);
+        }
+
+        #day {
+            height: 100px;
+            width: 600px;
+            background-color: rgb(0, 0, 0);
+            color: whitesmoke;
+            text-align: center;
+            font-size: 35px;
+            padding-top: 37px;
+            border-radius: 10px 10px 0px 0px;
+            border-left: 20px solid rgb(218, 182, 22);
+            border-right: 20px solid rgb(218, 182, 22);
+            border-top: 20px solid rgb(218, 182, 22);
+            letter-spacing: 3px;
+        }
+
+        #btnDiv1 {
+            height: 25px;
+            width: 390px;
+            background-color: inherit;
+        }
+
+        #btnDiv3 {
+            height: 35px;
+            width: 800px;
+            background-color: inherit;
+        }
+
+        button {
+            height: 25px;
+            width: 100px;
+            margin-left: 20px;
+            background-color: rgb(218, 182, 22);
+            border: 2px solid rgb(218, 182, 22);
+            color: whitesmoke;
+            font-size: 20px;
+            border-radius: 5px 5px 0px 0px;
+        }
+
+        #innerDiv {
+            height: 80vh;
+            width: 1220px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            background-image: url(./Images/Mesa\ de\ trabajo\ 1.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+            padding-bottom: 80px;
+        }
+
+        #bodyDiv {
+            height: 100vh;
+            width: 0 auto;
+            background-color: rgb(94, 68, 39);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            background-image: url(./Images/2.png);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="bodyDiv">
+        <h1>Weather it's the best of times or the worst of times. <br>It's only the time we've got. </h1>
+        <div id="innerDiv">
+            <div id="btnDiv1">
+                <div id="btnDiv2">
+                    <button></button>
+                    <button></button>
+                    <button></button>
+                </div>
+            </div>
+
+            <div id="day">
+                <p id="calendar"></p>
+            </div>
+            <div id="time">
+                <hr style="padding-bottom: 1px; background-color: whitesmoke; margin-bottom: 20px; margin-top: 10px;">
+                <p id="currentTime"></p>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        let calendar = document.getElementById('calendar');
+        let currentTime = document.getElementById('currentTime');
+        let weekDays = ["SUN", "MON", "TUE", "WED", "THURS", "FRI", "SAT",];
+        let fullMonth = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC",];
+        function digitalClock() {
+            let clock = new Date();
+            let day = weekDays[clock.getDay()];
+            let date = clock.getDate().toString().padStart(2, 0);
+            let month = fullMonth[clock.getMonth()];
+            let dayorNight = "";
+            let year = clock.getFullYear().toString().padStart(4, 0);
+            let seconds = clock.getSeconds().toString().padStart(2, 0);
+            let minutes = clock.getMinutes().toString().padStart(2, 0);
+            let hours = clock.getHours().toString().padStart(2, 0);
+
+            if (hours < 12) {
+                dayorNight = "AM";
+            }
+            else{
+                dayorNight = "PM";
+            }
+
+
+            currentTime.innerHTML = `${hours} : ${minutes} : ${seconds} ${dayorNight}`;
+            calendar.innerHTML = `${month} - ${day} ${date} - ${year}`;
+
+        }
+
+
+        setInterval(digitalClock, 1000)
+    </script>
+</body>
+
+</html>
